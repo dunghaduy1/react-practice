@@ -26,7 +26,7 @@ function BoardBar() {
   return (
     <Box px={2} sx={{
       width:'100%',
-      height:(theme) => theme.trello.appBarHeight,
+      height:(theme) => theme.trello.boardBarHeight,
       display:'flex',
       alignItems:'center',
       justifyContent: 'space-between',
@@ -39,8 +39,7 @@ function BoardBar() {
         height:(theme) => theme.trello.boardBarHeight,
         paddingX:2,
         display:'flex',
-        alignItems:'center',
-        borderTop: '1px solid #00bfa5'
+        alignItems:'center'
       }}>
         <Box sx={{ display:'flex', alignItems:'center', gap: 2 }}>
           <Chip
