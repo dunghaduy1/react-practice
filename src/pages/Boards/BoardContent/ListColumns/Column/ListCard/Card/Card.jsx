@@ -8,17 +8,24 @@ import CardMedia from '@mui/material/CardMedia'
 import ModeCommentIcon from '@mui/icons-material/ModeComment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-function Card() {
+function Card({ card }) {
+
+  const shouldShowCardActions = () => {
+    return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
+  }
+
   return (
     <MuiCard sx={{
       cursor: 'pointer',
       boxShadow: '0 1px 1px rgba(0,0,0,0.2)'
     }}>
+      { card?.cover &&
       <CardMedia
         sx={{ height: 140 }}
-        image="https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?resize=476%2C280&ssl=1"
+        image={card.cover}
         title="green iguana"
       />
+      }
       <CardContent
         sx={{
           p:1.5,
@@ -34,17 +41,25 @@ function Card() {
             fontSize:'1rem',
             cursor:'pointer'
           }}
-        >Lizard</Typography>
+        >{ card?.title }</Typography>
       </CardContent>
+      { shouldShowCardActions() &&
       <CardActions
         sx={{
           p:'0 4px 8px 4px'
         }}
       >
-        <Button size="small" startIcon={<GroupIcon/>}>10</Button>
-        <Button size="small" startIcon={<ModeCommentIcon/>}>15</Button>
-        <Button size="small" startIcon={<AttachmentIcon/>}>20</Button>
+        {!!card?.memberIds?.length &&
+        <Button size="small" startIcon={<GroupIcon/>}>{ card?.memberIds?.length }</Button>
+        }
+        {!!card?.comments?.length &&
+        <Button size="small" startIcon={<ModeCommentIcon/>}>{ card?.comments?.length }</Button>
+        }
+        {!!card?.attachments?.length &&
+        <Button size="small" startIcon={<AttachmentIcon/>}>{ card?.attachments?.length }</Button>
+        }
       </CardActions>
+      }
     </MuiCard>
   )
 }

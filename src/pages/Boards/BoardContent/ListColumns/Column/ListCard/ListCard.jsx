@@ -1,15 +1,12 @@
 import Box from '@mui/material/Box'
 import Card from './Card/Card'
 
-export function ListCard() {
+export function ListCard({ cards }) {
   return (
     <Box
       sx={{
         p:'0 5px',
         m:'0 5px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1,
         overflowX: 'hidden',
         overflowY: 'auto',
         maxHeight:(theme) => `calc(
@@ -27,7 +24,15 @@ export function ListCard() {
         }
       }}
     >
-      <Card/>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 1
+      }}>
+        { cards?.map((card) => (
+          <Card key={ card._id } card={ card } />
+        ))}
+      </Box>
     </Box>
   )
 }
